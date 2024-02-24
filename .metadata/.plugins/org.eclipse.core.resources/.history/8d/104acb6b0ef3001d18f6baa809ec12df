@@ -1,0 +1,117 @@
+package gau;
+
+import java.util.Scanner;
+
+public class gauu {
+    public static void main(String[] args) {
+        String islemSecenekleri = "Bakiye görüntüleme --- 1\n" 
+        		+ "Para çekmek --- 2\n" 
+        		+ "Farklı hesaba para yatırmak --- 3\n"
+                + "Çıkış yapmak için 'q' tuşuna basınız.";
+
+        Scanner scanner = new Scanner(System.in);
+
+        double bilalBakiye = 2450;
+        String bilalIBAN = "TR1265 0780 127 985 345 7572 1389";
+        String bilalKullaniciString = "bilal12";
+        String bilalSifreString = "123";
+
+        double enesBakiye = 1200;
+        String enesIBANString = "TR1234 000 567 985 345 6572 2345";
+        String enesKullaniciString = "enes55";
+        String enesSifreString = "456";
+
+        System.out.println("ATM'ye HOŞGELDİNİZ");
+        System.out.println("Lütfen bilgilerinizi giriniz");
+        System.out.println("Kullanıcı Adı: ");
+        String kullaniciAdiString = scanner.nextLine();
+        System.out.println("Şifre: ");
+        String sifreString = scanner.nextLine();
+
+        if (kullaniciAdiString.equals(bilalKullaniciString) && sifreString.equals(bilalSifreString)) {
+            System.out.println("Bilal Camur Hesabına Giriş Yapıldı");
+            System.out.println(islemSecenekleri);
+            System.out.println("Lütfen bir seçim yapınız: ");
+            String secim = scanner.nextLine();
+            switch (secim) {
+                case "1":
+                    System.out.println("Bakiyeniz: " + bilalBakiye);
+                    break;
+                case "2":
+                    System.out.println("Çekmek istediğiniz tutarı giriniz: ");
+                    int cekilecekTutar = scanner.nextInt();
+                    scanner.nextLine(); // sonraki string okumasını etkilememek için
+                    if (bilalBakiye >= cekilecekTutar) {
+                        bilalBakiye -= cekilecekTutar;
+                        System.out.println("Kalan tutar: " + bilalBakiye);
+                    } else {
+                        System.out.println("Bakiyenizden fazla para çekemezsiniz");
+                    }
+                    break;
+                case "3":
+                    System.out.println("Ne kadar yatırmak istiyorsunuz?");
+                    int yatirilacakTutar = scanner.nextInt();
+                    scanner.nextLine(); // sonraki string okumasını etkilememek için
+                    if (yatirilacakTutar <= bilalBakiye) {
+                        System.out.println("IBAN giriniz: ");
+                        String yatirilacakIBAN = scanner.nextLine();
+                        if (yatirilacakIBAN.equals(enesIBANString)) {
+                            System.out.println("Para Enes Bayram Adlı Kişiye Yatırılıyor");
+                            bilalBakiye -= yatirilacakTutar;
+                            enesBakiye += yatirilacakTutar;
+                        } else {
+                        	System.out.println("Geçersiz IBAN!");
+                        }
+                    } else {
+                        System.out.println("Yatırmak istediğiniz tutar bakiyenizden fazla!");
+                    }
+                    break;
+                default:
+                    System.out.println("Geçersiz bir seçim yaptınız!");
+            }
+        } else if (kullaniciAdiString.equals(enesKullaniciString) && sifreString.equals(enesSifreString)) {
+            System.out.println("Enes Bayram Hesabına Giriş Yapıldı");
+            System.out.println(islemSecenekleri);
+            System.out.println("Lütfen bir seçim yapınız: ");
+            String secim = scanner.nextLine();
+            switch (secim) {
+                case "1":
+                    System.out.println("Bakiyeniz: " + enesBakiye);
+                    break;
+                case "2":
+                    System.out.println("Çekmek istediğiniz tutarı giriniz: ");
+                    int cekilecekTutar = scanner.nextInt();
+                    scanner.nextLine(); // sonraki string okumasını etkilememek için
+                    if (enesBakiye >= cekilecekTutar) {
+                        enesBakiye -= cekilecekTutar;
+                        System.out.println("Kalan tutar: " + enesBakiye);
+                    } else {
+                        System.out.println("Bakiyenizden fazla para çekemezsiniz");
+                    }
+                    break;
+                case "3":
+                    System.out.println("Ne kadar yatırmak istiyorsunuz?");
+                    int yatirilacakTutar = scanner.nextInt();
+                    scanner.nextLine(); // sonraki string okumasını etkilememek için
+                    if (yatirilacakTutar <= enesBakiye) {
+                        System.out.println("IBAN giriniz: ");
+                        String yatirilacakIBAN = scanner.nextLine();
+                        if (yatirilacakIBAN.equals(bilalIBAN)) {
+                            System.out.println("Para Bilal Camur Adlı Kişiye Yatırılıyor");
+                            enesBakiye -= yatirilacakTutar;
+                            bilalBakiye += yatirilacakTutar;
+                        } else {
+                            System.out.println("Geçersiz IBAN!");
+                        }
+                    } else {
+                        System.out.println("Yatırmak istediğiniz tutar bakiyenizden fazla!");
+                    }
+                    break;
+                default:
+                    System.out.println("Geçersiz bir seçim yaptınız!");
+            }
+        } else {
+            System.out.println("Kullanıcı adınız veya şifreniz yanlış!");
+        }
+    }
+}
